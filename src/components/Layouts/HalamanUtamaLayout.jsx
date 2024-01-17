@@ -3,17 +3,28 @@ import Button from '../Elements/Button/Button'
 import Point from '../Elements/Point/Point'
 import Input from '../Elements/Input/Input'
 import Footer from '../Fragments/Footer'
+import { useUser } from '../Layouts/userContext'
 
 const HalamanUtama= () => {
+    const {user} = useUser()
+    const handleTakeTest = () => {
+        if(user.uid){
+            window.location.href = "/test"
+        }
+        else{
+            window.location.href = "/login"
+        }
+    }
     return(
         <div className='flex flex-col w-full h-full'>
-            <Header isLogin={window.localStorage.getItem("token")}></Header>
-
+            <Header></Header>
+            
             <div className="first-content  w-full h-screen flex justify-between">
                 <div className='flex flex-col w-1/2 justify-center px-24'>
-                <div className='text-3xl font-bold mb-8'>AUTISM SPECTRUM DISORDER (ASD) </div>
-                <div className='text-sm mb-8'>Autism Spectrum Disorder (ASD) or autism is a disorder that occurs in brain development (neurodevelopment) which is characterized by individual difficulties in interacting verbal and non-verbal communication, experiencing disturbances in behavior, and having limitations in interests and activities. In the context of early intervention and support, a test is required to determine whether a child has autism, press the button below to take the test.</div>
-                <Button variant="primary" width="w-36">TAKE TEST</Button>
+                <div className='text-4xl font-bold mb-8'>AUTISM SPECTRUM DISORDER (ASD) </div>
+                <div className='text-md mb-4'>Autism Spectrum Disorder (ASD) or autism is a disorder that occurs in brain development (neurodevelopment) which is characterized by individual difficulties in interacting verbal and non-verbal communication, experiencing disturbances in behavior, and having limitations in interests and activities. In the context of early intervention and support, a test is required to determine whether a child has autism, press the button below to take the test.</div>
+                <div className='text-md mb-4 font-semibold text-red'>Note: recommended age for children to take the test on this website is 2 - 16 years</div>
+                <Button variant="primary" width="w-36" onClick={() => handleTakeTest()}>Take Test</Button>
                 </div>
                 <div className='flex justify-center items-center w-1/2'>
                 <img src="./src/assets/children.jpg" alt="Children Image" className='object-cover w-full h-full'/>
@@ -21,7 +32,7 @@ const HalamanUtama= () => {
             </div>
 
             <div className="second-content w-full h-screen flex justify-center bg-blue flex justify-center items-center flex-col p-32">
-                <div className='text-3xl font-bold text-white text-center mb-16'>WHY SHOULD YOU HAVE AN AUTISM DIAGNOSIS HERE?</div>
+                <div className='text-4xl font-bold text-white text-center mb-16'>WHY SHOULD YOU HAVE AN AUTISM DIAGNOSIS HERE?</div>
                 <div className='flex justify-center items-between px-48'>
                     <Point title="Fast & Easy" desc="Our test takes less than 30 minutes to complete and easy to do" image="fast.png"></Point>
                     <Point title="Privacy Safe" desc="We ensure that all stored data is safely maintained in the system" image="privacy.png"></Point>

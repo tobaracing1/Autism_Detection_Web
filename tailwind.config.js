@@ -14,6 +14,8 @@ export default {
       'test': '#922828',
       'gray' : '#F3F3F3',
       'dark-gray' : "#AEAEAE",
+      'red': "#D10000",
+      'light-red' : "#FF7377",
     },
     fontFamily: {
       sans: ['Montserrat', 'sans-serif'],

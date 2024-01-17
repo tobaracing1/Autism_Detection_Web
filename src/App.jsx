@@ -1,22 +1,30 @@
 import './index.css'
-import Header from './components/Fragments/Header'
-import Button from './components/Elements/Button/Button'
-import Point from './components/Elements/Point/Point'
-import Input from './components/Elements/Input/Input'
-import Footer from './components/Fragments/Footer'
-import HalamanUtama from './components/Layouts/HalamanUtama'
-import RadioInput from './components/Elements/Input/radioInput'
-import HalamanSignup from './components/Layouts/HalamanSignup'
-import HalamanLogin from './components/Layouts/HalamanLogin'
-import HalamanAdmin from './components/Layouts/HalamanAdmin'
-import { useState } from 'react'
+
+import HalamanUtama from './components/Layouts/HalamanUtamaLayout/'
+import HalamanSignup from './components/Layouts/HalamanSignupLayout'
+import HalamanLogin from './components/Layouts/HalamanLoginLayout'
+import HalamanAdmin from './components/Layouts/HalamanAdminLayout'
+import HalamanTest from './components/Layouts/HalamanTestLayout'
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { UserProvider } from './components/Layouts/userContext'
+import { useUser } from './components/Layouts/userContext'
+
 
 function App() {
-  
 
   return (
-      
-    <HalamanAdmin></HalamanAdmin>
+    <UserProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<HalamanUtama />} />
+          <Route path="/signup" element={<HalamanSignup />} />
+          <Route path="/login" element={<HalamanLogin />} />
+          <Route path="/admin" element={<HalamanAdmin />} />
+          <Route path="/test" element={<HalamanTest />}/>
+        </Routes>
+      </Router>
+    </UserProvider>
+    
   )
 }
 
