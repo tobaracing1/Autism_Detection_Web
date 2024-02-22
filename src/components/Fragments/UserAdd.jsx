@@ -1,10 +1,9 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react"
 import Input from "../Elements/Input/Input"
 import RadioInput from "../Elements/Input/radioInput"
 import BirthInput from "../Elements/Input/birthInput"
 import Button from "../Elements/Button/Button"
-import { auth } from "../../script/firebase_key"
-import { createUserWithEmailAndPassword } from "firebase/auth"
 import axios from "axios"
 
 const UserAdd = ({setIsAddLayoutVisible, page, setData}) => {
@@ -30,7 +29,6 @@ const UserAdd = ({setIsAddLayoutVisible, page, setData}) => {
             if(checked == "" || email == "" || password == "" ||  username == "") throw new Error("Please fill all the fields")
             
             if(password.length < 6) {
-                console.log("password : " + email)
                 throw new Error("Password must be atleast 6 characters")
             }
 
@@ -43,6 +41,8 @@ const UserAdd = ({setIsAddLayoutVisible, page, setData}) => {
                 password: password
             })
 
+            if(saveUserData.data.code == "auth/invalid-email")  throw new Error ("Invalid email format")
+
             setIsAddLayoutVisible(false)
             const fetchData = await axios.get("http://localhost:8082/api/users")
             setData(fetchData.data)
@@ -52,16 +52,23 @@ const UserAdd = ({setIsAddLayoutVisible, page, setData}) => {
             const errorContainer = document.getElementById("errorMessage")
 
             errorContainer.style.display = "flex"
-            if(error.code === 'auth/email-already-in-use'){
-                errorContainer.innerHTML = "Email already in use"
+
+            if (error.response) {
+            // Handle other server errors
+
+                // Check specifically for Firebase authentication errors
+                if (error.response.data.errorInfo && error.response.data.errorInfo.code === 'auth/invalid-email') {
+                    errorContainer.innerHTML = "Invalid email format";
+                } else {
+                    // Handle other server errors
+                    errorContainer.innerHTML = "Server error: " + error.response.status;
+                }
+            } else if (error.request) {
+                errorContainer.innerHTML = "No response from server";
+            } else {
+                errorContainer.innerHTML = error.message;
             }
-            else if(error.code === 'auth/weak-password'){
-                errorContainer.innerHTML = "Password must be atleast 6 characters"
-            }
-            else{
-                errorContainer.innerHTML = error.message
-            }
-        }   
+  }
     }
     
     return (
@@ -69,9 +76,9 @@ const UserAdd = ({setIsAddLayoutVisible, page, setData}) => {
             <button onClick={closeLayout} className="absolute top-8 right-8 font-bold">X</button>
             <div className="text-lg font-bold my-4">User</div>
             <div className=' text-sm mb-8 text-red border border-red w-full h-10 hidden items-center justify-center rounded-md bg-light-red/25' id='errorMessage'></div>
-            <Input placeholder={"Email"} type={"email"} id={"email"} onChange={(e) => setEmail(e.target.value)}>Email</Input>
-            <Input placeholder={"Password"} type={"input"} id={"password"} onChange={(e) => setPassword(e.target.value)}>Password</Input>
-            <Input placeholder={"Name"} type={"input"} id={"name"} onChange={(e) => setUsername(e.target.value)}>Name</Input>
+            <Input placeholder={"Email"} type={"email"} id={"email"} value={email} onChange={(e) => setEmail(e.target.value)}>Email</Input>
+            <Input placeholder={"Password"} type={"input"} id={"password"} value={password} onChange={(e) => setPassword(e.target.value)}>Password</Input>
+            <Input placeholder={"Name"} type={"input"} id={"name"} value={username} onChange={(e) => setUsername(e.target.value)}>Name</Input>
             
             <div className="radioInput w-full flex flex-col justify-center items-center mb-4">  
                 <label htmlFor="" className=" w-full text-md text-left text-dark-gray mb-2">Gender</label>
@@ -81,7 +88,7 @@ const UserAdd = ({setIsAddLayoutVisible, page, setData}) => {
                 </div>
             </div>
 
-            <BirthInput type={"date"} id={"birthday"} onChange={(e) => setBirthday(e.target.value)}  max={"2007-12-31"}>Birthday</BirthInput>
+            <BirthInput type={"date"} id={"birthday"} value={birthday} onChange={(e) => setBirthday(e.target.value)}  max={"2007-12-31"}>Birthday</BirthInput>
 
             <Button variant={"primary"} width={"w-full"} onClick={() => addUser()}>Add</Button>
         </div>

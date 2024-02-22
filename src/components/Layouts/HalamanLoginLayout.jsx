@@ -47,17 +47,17 @@ const HalamanLogin = () => {
 
 
     return(
-        <div className="Signup w-screen h-screen flex justify-center items-center bg-gradient-to-br from-blue to-orange">
-            <button className='flex justify-center items-center fixed top-20 left-20' onClick={() => window.location.href = "/"}> 
+        <div className="Signup w-screen h-full flex flex-col min-h-screen justify-center items-center bg-gradient-to-br from-blue to-orange">
+            <button className='flex justify-center my-8 items-center top-10 left-20 right-20' onClick={() => window.location.href = "/"}> 
                 <img src="./src/assets/deautism.png" alt="LOGO" className=''/>
             </button>
 
-            <div className='h-max w-3/10 p-12 flex flex-col justify-center items-center bg-white border border-dark-gray rounded-lg'>
+            <div className='h-max w-[80%] p-12 flex flex-col justify-center items-center bg-white border border-dark-gray rounded-lg lg:w-[30%]'>
                 <div className="title font-bold text-3xl mb-8 text-center">Login to take test</div>
                 <div className='text-sm mb-8 text-red border border-red w-full h-10 hidden items-center justify-center rounded-md bg-light-red/25' id='errorMessage'></div>
                 <div className="content flex flex-col w-full mb-8 justify-center">
-                    <Input placeholder={"Enter your email"} type={"email"} id={"email"} onChange={(e) => setEmail(e.target.value)}>Email</Input>
-                    <Input placeholder={"Enter your password"} type={"password"} id={"password"} onChange={(e) => setPassword(e.target.value)}>Password</Input>
+                    <Input placeholder={"Enter your email"} value={email} type={"email"} id={"email"} onChange={(e) => setEmail(e.target.value)}>Email</Input>
+                    <Input placeholder={"Enter your password"} value={password} type={"password"} id={"password"} onChange={(e) => setPassword(e.target.value)}>Password</Input>
                 </div>
                 <div className="signup mb-4 text-xs">Don't have an account? click here to <a href="/signup" className='text-blue text-xs underline'>signup</a></div>
                 <Button variant={"primary"} width={"w-full"} onClick={() => login()} >Login</Button>
