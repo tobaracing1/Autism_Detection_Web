@@ -2,7 +2,7 @@
 import Button from "../../Elements/Button/Button";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Answer from "../../Fragments/Answer";
+import Answer from "../../Elements/Input/Answer";
 
 const Q2Layout = ({ currentPage, setCurrentPage, questionData, setQuestionData}) => {
   const [childData, setChildData] = useState([])

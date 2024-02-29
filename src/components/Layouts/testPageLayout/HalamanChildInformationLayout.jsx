@@ -88,7 +88,7 @@ const ChildInformationLayout = ({currentPage, setCurrentPage, setUseRegisteredCh
                             <BirthInput type={"date"} id={"birthday"} value={childInformationData.birthday} onChange={(e) => setChildInformationData({...childInformationData, birthday: e.target.value})}  max={currentDate}>Birthday</BirthInput>
                         </div>
                         <div className="row-start-2 w-[90%] flex justify-center items-center">
-                            <select id="etnic" name="etnic" value={childInformationData.etnic} onChange={(e) => setChildInformationData({...childInformationData, etnic: e.target.value})}  className="block w-full h-10 rounded-md border-0 py-1.5 text-dark-gray shadow-sm ring-1 ring-inset ring-gray focus:ring-2 focus:ring-inset focus:ring-black focus:text-black sm:max-w-xs sm:text-sm sm:leading-6">
+                            <select id="etnic" name="etnic" value={childInformationData.etnic} onChange={(e) => setChildInformationData({...childInformationData, etnic: e.target.value})}  className="block w-full h-10 text-sm rounded-md border-0 p-2 text-dark-gray shadow-sm ring-1 ring-inset ring-gray focus:ring-2 focus:ring-inset focus:ring-black focus:text-black sm:max-w-xs lg:text-md sm:leading-6">
                                 <option value="" disabled selected>Select Etnicity</option>
                                 <option value="African">African</option>
                                 <option value="African American">African American</option>
@@ -146,8 +146,8 @@ const ChildInformationLayout = ({currentPage, setCurrentPage, setUseRegisteredCh
                                 <RadioInput name={"gender"} value={"Female"} id={"Female"} handleChange={handleChange} check={childInformationData.check}>Female</RadioInput>
                             </div>
                         </div>
-                        <div className="col-span-2 row-start-3 w-[95%] w-full flex justify-center items-center mb-4">
-                            <select id="testerRole" name="testerRole" value={childInformationData.testerRole} onChange={(e) => setChildInformationData({...childInformationData, testerRole: e.target.value})}  className="block w-[95%] h-10 rounded-md border-0 text-dark-gray p-2 shadow-sm ring-1 ring-inset ring-gray focus:ring-2 focus:ring-inset focus:ring-black focus:text-black sm:text-sm sm:leading-6">
+                        <div className="col-span-2 row-start-3 w-[95%] w-full flex justify-center items-center mb-4 ">
+                            <select id="testerRole" name="testerRole" value={childInformationData.testerRole} onChange={(e) => setChildInformationData({...childInformationData, testerRole: e.target.value})}  className="block w-[95%] h-10 text-sm rounded-md border-0 text-dark-gray p-2 shadow-sm ring-1 ring-inset ring-gray focus:ring-2 focus:ring-inset focus:ring-black focus:text-black lg:text-md sm:leading-6">
                                 <option value="" disabled selected>What is your relation with the child?</option>
                                 <option value="Parent">Parent</option>
                                 <option value="Brother/Sister">Brother/Sister</option>

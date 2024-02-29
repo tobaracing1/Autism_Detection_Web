@@ -2,7 +2,11 @@
 import Button from "../../Elements/Button/Button";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Answer from "../../Fragments/Answer";
+import Answer from "../../Elements/Input/Answer";
+import Selection from "../../Fragments/Question/Selection";
+import MultipleChoice from "../../Fragments/Question/MultipleChoice";
+import Essay from "../../Fragments/Question/Essay";
+import CheckBox from "../../Fragments/Question/checkBox";
 
 const Q1Layout = ({ currentPage, setCurrentPage, questionData, setQuestionData}) => {
   const [childData, setChildData] = useState([])
@@ -21,11 +25,12 @@ const Q1Layout = ({ currentPage, setCurrentPage, questionData, setQuestionData})
 
   function nextPage() {
     try {
-        if(questionData['Q1'] === undefined || questionData['Q2'] === undefined || questionData['Q3'] === undefined || questionData['Q4'] === undefined || questionData['Q5'] === undefined) {
+        if(questionData[1] === undefined ) {
             throw new Error("Please fill all the questions with answer")
         }
         else{
             if (currentPage < 4) {
+                console.log(questionData)
                 setCurrentPage(currentPage + 1);
                 document.documentElement.scrollTop = 0;
                 document.body.scrollTop = 0;
@@ -36,6 +41,7 @@ const Q1Layout = ({ currentPage, setCurrentPage, questionData, setQuestionData})
         
     } catch (error) {
         const errorContainer = document.getElementById("errorMessage")
+        console.log(questionData)
         errorContainer.style.display = "flex"
         errorContainer.innerHTML = error.message
     }
@@ -47,38 +53,28 @@ const Q1Layout = ({ currentPage, setCurrentPage, questionData, setQuestionData})
     <div className="page1 w-full flex flex-col items-center mb-8">
       <div className="flex flex-col w-[80%] items-center box-border rounded-lg w-max-content border p-8 lg:w-[60%]">
         <div className="w-full flex flex-col justify-start">
+          <MultipleChoice 
+            questionData={questionData} setQuestionData={setQuestionData} number="1" title="RELATING TO PEOPLE"
+            choiceTitleA={"No evidence of difficulty or abnormality in relating to people"}
+            choiceTitleB={"Evidence of difficulty or abnormality in relating to people"}
+            choiceTitleC={"Moderately abnormal relationships"}
+            choiceTitleD={"Severe abnormal relationships"}
+            choiceDescA={"The child's behavior is appropriate for his or her age. Some shyness, fussiness, or annoyance at being told what to do may be observed, but not to an atypical degree."}
+            choiceDescB={"The child may avoid looking the adult in the eye, avoid the adult or become fussy if interaction is forced, be excessively shy, not be as responsive to the adult as is typical, or cling to parents somewhat more than most children of the same age."}
+            choiceDescC={"The child shows aloofness (seems unaware of adult) at times. Persistent and forceful attempts are necessary to get the child's attention at times. Minimal contact is initiated by the child."}
+            choiceDescD={"The child is consistently aloof or unaware of what the adult is doing. He or she almost never responds to or initiates contact with the adult. Only the most persistent attempts to get the child's attention have any effect."}>
+            Which category best describes your child's behavior of consistently avoiding eye contact with adults, showing excessive shyness, and requiring constant effort to get their attention, sometimes showing aloofness and minimal initiation of contact?
+          </MultipleChoice>
+
+          <Essay questionData={questionData} setQuestionData={setQuestionData} number="2" title="IMITATION" placeholder={"type something..."}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, fugit? Illo consectetur quis totam vel voluptas necessitatibus quibusdam ducimus ea. Fugiat ex repellendus amet voluptatibus tempora natus iste aspernatur laborum?</Essay>  
+
+          <Selection number={3} title="SPEAKING" questionData={questionData} setQuestionData={setQuestionData} 
+          selectionData={["No evidence of difficulty or abnormality in speaking", "Evidence of difficulty or abnormality in speaking", "Moderately abnormal speech", "Severe abnormal speech"]}>asdasdasd</Selection>  
+
+          <CheckBox number={4} title="IMITATION" questionData={questionData} setQuestionData={setQuestionData}></CheckBox>
 
           <div className=" mt-8">
-            <div className="Q1 mb-4">
-                <div className="question flex w-full">
-                    <div className="font-bold text-lg w-4">1. </div>
-                    <div className="text-black font-bold ml-4 text-lg">RELATING TO PEOPLE</div>
-                </div>
-                <div className="question flex w-full">
-                    <div className="font-bold text-lg w-4"></div>
-                    <div className="text-black ml-6 mb-4 text-md">Which category best describes your child's behavior of consistently avoiding eye contact with adults, showing excessive shyness, and requiring constant effort to get their attention, sometimes showing aloofness and minimal initiation of contact?</div>
-                </div>
-                <div className="answer">
-                    <div className=' flex flex-col w-full justify-center items-center h-full p-0.5'>
-                        <Answer questionData={questionData} setQuestionData={setQuestionData} value="A1" questionNumber="Q1" choice="A" choiceTitle="No evidence of difficulty or abnormality in relating to people">The child's behavior is appropriate for his or her age. Some shyness, fussiness, or annoyance at being told what to do may be observed, but not to an atypical degree.</Answer>
-                    </div>
-                </div>
-                <div className="answer">
-                    <div className=' flex flex-col w-full justify-center items-center h-full p-0.5'>
-                        <Answer questionData={questionData} setQuestionData={setQuestionData} value="A2" questionNumber="Q1" choice="B" choiceTitle="Mildly abnormal relationships">The child may avoid looking the adult in the eye, avoid the adult or become fussy if interaction is forced, be excessively shy, not be as responsive to the adult as is typical, or cling to parents somewhat more than most children of the same age.</Answer>
-                    </div>
-                </div>
-                <div className="answer">
-                    <div className=' flex flex-col w-full justify-center items-center h-full p-0.5'>
-                        <Answer questionData={questionData} setQuestionData={setQuestionData} value="A3" questionNumber="Q1" choice="C" choiceTitle="Moderately abnormal relationships">The child shows aloofness (seems unaware of adult) at times. Persistent and forceful attempts are necessary to get the child's attention at times. Minimal contact is initiated by the child.</Answer>
-                    </div>
-                </div>
-                <div className="answer">
-                    <div className=' flex flex-col w-full justify-center items-center h-full p-0.5'>
-                        <Answer questionData={questionData} setQuestionData={setQuestionData} value="A4" questionNumber="Q1" choice="D" choiceTitle="Severely abnormal relationships">The child is consistently aloof or unaware of what the adult is doing. He or she almost never responds to or initiates contact with the adult. Only the most persistent attempts to get the child's attention have any effect.</Answer>
-                    </div>
-                </div>
-            </div>
+            
 
             <div className="Q2 mb-4">
                 <div className="question flex w-full">
