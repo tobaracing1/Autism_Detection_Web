@@ -35,7 +35,7 @@ const PageTitle = ({currentPage, useRegisteredChild}) => {
         const RegisteredChildTitle = () => {
             return (
                 <div className='flex flex-col items-center w-[60%] '>
-                    <div className="text-black text-4xl font-bold mb-8">Registered Child</div>
+                    <div className="text-black text-center text-4xl font-bold mb-8">Registered Child</div>
                     <div className="text-black text-lg text-center">In order to diagnose autism in children, information is needed about the child to support the analysis that will be carried out by the system. Please fill in the data of the child you want to diagnose or use the data of a child who is already registered in the system.</div>
                 </div>
             )
@@ -50,7 +50,7 @@ const PageTitle = ({currentPage, useRegisteredChild}) => {
     const Page1 = () => {
         return (
             <div className='flex flex-col items-center w-[60%] '>
-                <div className="text-black text-center text-4xl font-bold mb-8">1 - 5 Questions</div>
+                <div className="text-black text-center text-4xl font-bold mb-8">Section 1 <br /><span className='font-semibold text-2xl '>How does the person you are rating communicate?</span></div>
                 <div className="text-black text-lg text-center">To be able to diagnose whether a child who has been diagnosed with autism requires information that will be taken based on the answers to the questions that will be displayed, please answer the questions below based on observations and experiences of the child who has been diagnosed.</div>
             </div>
         )
@@ -133,7 +133,6 @@ const HalamanTest= () => {
         else{
             setPercent("100")   
         }
-        console.log(currentPage)
     }, [currentPage])
 
     return(

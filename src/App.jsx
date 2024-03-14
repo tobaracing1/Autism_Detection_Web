@@ -1,5 +1,4 @@
 import './index.css'
-
 import HalamanUtama from './components/Layouts/HalamanUtamaLayout/'
 import HalamanSignup from './components/Layouts/HalamanSignupLayout'
 import HalamanLogin from './components/Layouts/HalamanLoginLayout'
@@ -9,10 +8,9 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import { UserProvider } from './components/Layouts/userContext'
 import HalamanAbout from './components/Layouts/HalamanAbout'
 import HalamanRiwayat from './components/Layouts/HalamanRiwayatLayout'
-
+import HalamanScreeningResult from './components/Layouts/HalamanScreeningResult'
 
 function App() {
-
   return (
     <UserProvider>
       <Router>
@@ -24,6 +22,7 @@ function App() {
           <Route path="/test" element={<HalamanTest />}/>
           <Route path="/about" element={<HalamanAbout />}/>
           <Route path="/history" element={<HalamanRiwayat />}/>
+          <Route path="/result" element={<HalamanScreeningResult />}/>
         </Routes>
       </Router>
     </UserProvider>

@@ -5,6 +5,7 @@ import RadioInput from "../Elements/Input/radioInput";
 import BirthInput from "../Elements/Input/birthInput";
 import Button from "../Elements/Button/Button";
 import axios from "axios";
+import { useUser } from "../Layouts/userContext";
 
 const UserEdit = ({ setIsEditLayoutVisible, page, setData, idP, emailP, nameP, birthdayP, genderP }) => {
   const [checked, setChecked] = useState(genderP);
@@ -13,6 +14,7 @@ const UserEdit = ({ setIsEditLayoutVisible, page, setData, idP, emailP, nameP, b
   const [role, setRole] = useState("user");
   const [birthday, setBirthday] = useState(birthdayP);
   const [gender, setGender] = useState(genderP);
+  const { token } = useUser();
 
   // Set initial state based on parameters
   useEffect(() => {
@@ -22,7 +24,6 @@ const UserEdit = ({ setIsEditLayoutVisible, page, setData, idP, emailP, nameP, b
     setGender(genderP);
     setChecked(genderP);
 
-    console.log(birthday)
   }, [emailP, nameP, birthdayP, genderP]);
 
   function handleChange(e) {
@@ -45,13 +46,14 @@ const UserEdit = ({ setIsEditLayoutVisible, page, setData, idP, emailP, nameP, b
         role: role,
         birthday: birthday,
         gender: gender
-      });
+      },token);
 
       if (saveUserData.data.code === "auth/invalid-email") throw new Error("Invalid email format");
 
       setIsEditLayoutVisible(false);
-      const fetchData = await axios.get("http://localhost:8082/api/users");
-      setData(fetchData.data);
+      const fetchData = await axios.get("http://localhost:8082/api/users", token);
+      setData(fetchData.data.userData);
+
     } catch (error) {
       const errorContainer = document.getElementById("errorMessage");
 

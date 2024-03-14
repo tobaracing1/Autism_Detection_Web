@@ -1,6 +1,9 @@
 import Header from "../Fragments/Header"
 import Footer from "../Fragments/Footer"
-
+import rickyImg from "/src/assets/ricky.png"
+import instagramIcon from "/src/assets/icon/icons8-instagram-100.png"
+import emailIcon from "/src/assets/icon/icons8-email-100.png"
+import linkedinIcon from "/src/assets/icon/icons8-linkedin-100.png"
 
 const HalamanAbout = () => {
     
@@ -17,7 +20,7 @@ const HalamanAbout = () => {
                 <div className="h-full w-full flex box-border flex-col lg:flex-row lg:border-t-4 lg:border-white">
                     <div className="content-1 w-full max-h-content bg-blue p-12 flex flex-col lg:justify-center lg:border-r-2 lg:border-white">
                         <div className="w-full flex justify-center">
-                            <img className="w-96 hidden lg:flex lg:mb-8 " src="/src/assets/ricky.png" alt="" />
+                            <img className="w-96 hidden lg:flex lg:mb-8 " src={rickyImg} alt="" />
                         </div>
                         <div className="text-2xl text-white font-bold">Ricky</div>
                         <div className="text-lg text-white font-semibold text-left">Frontend and Backend Developer</div>
@@ -26,19 +29,19 @@ const HalamanAbout = () => {
                         <ul className="flex flex-col mt-4">
                             <li className="mb-2">
                                 <a className="flex items-center" href="">
-                                    <img className="w-8" src="/src/assets/icon/icons8-email-100.png" alt="" />
+                                    <img className="w-8" src={emailIcon} alt="" />
                                     <div className="font-semibold text-white ml-2">03082200012@student.uph.edu</div>
                                 </a>
                             </li>
                             <li className="mb-2">
                                 <a className="flex items-center" href="https://www.instagram.com/ricky_cen/?hl=en">
-                                    <img className="w-8" src="/src/assets/icon/icons8-instagram-100.png" alt="" />
+                                    <img className="w-8" src={instagramIcon} alt="" />
                                     <div className="font-semibold text-white ml-2">@ricky_cen</div>
                                 </a>
                             </li>
                             <li className="mb-2">
                                 <a className="flex items-center" href="https://www.linkedin.com/in/ricky-cen/">
-                                    <img className="w-8" src="/src/assets/icon/icons8-linkedin-100.png" alt="" />
+                                    <img className="w-8" src={linkedinIcon} alt="" />
                                     <div className="font-semibold text-white ml-2">Ricky Cen</div>
                                 </a>
                             </li>
@@ -48,7 +51,7 @@ const HalamanAbout = () => {
                     </div>
                     <div className="content-2 w-full h-full bg-blue p-12 flex flex-col lg:justify-center lg:border-l-2 lg:border-white">
                         <div className="w-full flex justify-center">
-                            <img className="w-96 hidden lg:flex lg:mb-8" src="/src/assets/ricky.png" alt="" />
+                            <img className="w-96 hidden lg:flex lg:mb-8" src={rickyImg} alt="" />
                         </div>
                         <div className="text-2xl text-white font-bold text-right">Tiffany Widjaya</div>
                         <div className="text-lg text-white font-semibold text-right">Machine Learning Engineer</div>
@@ -58,19 +61,19 @@ const HalamanAbout = () => {
                             <li className="mb-2">
                                 <a className="flex items-center" href="">
                                     <div className="font-semibold text-white mr-2">03082200006@student.uph.edu</div>
-                                    <img className="w-8" src="/src/assets/icon/icons8-email-100.png" alt="" />
+                                    <img className="w-8" src={emailIcon} alt="" />
                                 </a>
                             </li>
                             <li className="mb-2">
                                 <a className="flex items-center" href="https://www.instagram.com/tiffanywidjaya/?hl=en">
                                     <div className="font-semibold text-white mr-2">@tiffanywidjaya</div>
-                                    <img className="w-8" src="/src/assets/icon/icons8-instagram-100.png" alt="" />
+                                    <img className="w-8" src={instagramIcon} alt="" />
                                 </a>
                             </li>
                             <li className="mb-2">
                                 <a className="flex items-center" href="https://www.linkedin.com/in/tiffany-widjaya/">
                                     <div className="font-semibold text-white mr-2">Tiffany Widjaya</div>
-                                    <img className="w-8" src="/src/assets/icon/icons8-linkedin-100.png" alt="" />
+                                    <img className="w-8" src={linkedinIcon} alt="" />
                                 </a>
                             </li>
                         </ul>
