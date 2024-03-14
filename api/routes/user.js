@@ -1,10 +1,10 @@
 import { auth, db } from '../../firebase_key.js'
+import verifyToken from '../../middleware/verifyToken.js'
 import { collection, getDocs, doc, setDoc, addDoc, getDoc } from 'firebase/firestore'
 import express from 'express'
 const router = express.Router()
 
-
-router.get('/', async (req, res) => {
+router.get('/',verifyToken, async (req, res) => {
     try {
         const userRecords = await auth.listUsers();
         const userCollectionRef = db.collection("users")
@@ -26,14 +26,18 @@ router.get('/', async (req, res) => {
             }
         })
 
-        res.json(combineData)
+        res.status(200).json({
+            status : "Success",
+            message : "Success get all users",
+            userData : combineData
+        })
     } catch (err) {
         console.error(err)
         res.json(err)
     }
 })
 
-router.get('/:id', async (req, res) => {
+router.get('/:id',verifyToken, async (req, res) => {
     try {
         const { id } = req.params;
         const userDocRef = db.collection('users')
@@ -50,7 +54,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-router.post('/', async (req, res) =>  {
+router.post('/',verifyToken, async (req, res) =>  {
     const {name, role, birthday, gender, id} = req.body
     try {
         const userDocRef = db.collection('users').doc(id)
@@ -62,7 +66,7 @@ router.post('/', async (req, res) =>  {
     }
 })
 
-router.delete('/:id', async (req, res) =>  {
+router.delete('/:id',verifyToken, async (req, res) =>  {
     const { id } = req.params;
     try {
         const userDocRef = db.collection('users').doc(id)
@@ -75,7 +79,7 @@ router.delete('/:id', async (req, res) =>  {
     }
 })
 
-router.post('/add', async (req, res) =>  {
+router.post('/add',verifyToken, async (req, res) =>  {
     const {email, password, role, name, birthday, gender} = req.body
     try {
         const user = await auth.createUser({email, password})
@@ -90,7 +94,7 @@ router.post('/add', async (req, res) =>  {
     }
 })
 
-router.put('/:id', async (req, res) =>  {
+router.put('/:id',verifyToken, async (req, res) =>  {
     const {id} = req.params
     const { name, role, birthday, gender } = req.body
     try {

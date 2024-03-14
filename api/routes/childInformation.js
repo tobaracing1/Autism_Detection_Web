@@ -1,10 +1,11 @@
 import { auth, db, firestore } from '../../firebase_key.js'
 import { collection, getDocs, doc, setDoc, addDoc, getDoc } from 'firebase/firestore'
 import express from 'express'
+import verifyToken from '../../middleware/verifyToken.js'
 const router = express.Router()
 
 
-router.get('/', async (req, res) => {
+router.get('/',verifyToken, async (req, res) => {
     try {
         const childInformationCollectionRef = db.collection("childInformation")
         const childInformationSnapshot = await childInformationCollectionRef.get()
@@ -16,14 +17,18 @@ router.get('/', async (req, res) => {
             }
         }))
 
-        res.json(childInformationsData)
+        res.status(200).json({
+            status : "Success",
+            message : "Success get all childInformations",
+            childData : childInformationsData
+        })
     } catch (err) {
         console.error(err)
         res.json(err)
     }
 })
 
-router.get('/:id', async (req, res) => {
+router.get('/:id',verifyToken, async (req, res) => {
     try {
         const { id } = req.params;
         const childInformationCollectionRef = db.collection("childInformation")
@@ -37,7 +42,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-router.post('/', async (req, res) =>  {
+router.post('/',verifyToken, async (req, res) =>  {
     const {name, birthday, gender, etnic, testerRole, userId} = req.body
     function generateRandomId() {
         // Generating a random number and converting it to a hexadecimal string
@@ -64,7 +69,7 @@ router.post('/', async (req, res) =>  {
     }
 })
 
-router.delete('/:id', async (req, res) =>  {
+router.delete('/:id',verifyToken, async (req, res) =>  {
     const { id } = req.params;
     try {
         const userDocRef = db.collection('users').doc(id)
